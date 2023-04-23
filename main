@@ -1,0 +1,167 @@
+#include <iostream>
+#include <string>
+
+std::string occassionToneOutput(int selection, int choice);
+
+using namespace std;
+
+int main() {
+   // List of occasions
+   std::string occasions[] = {
+       "Birthday", "Anniversary", "Valentine's day", "Mother's Day", "Father's Day",
+       "Christmas", "New Year", "Graduation", "Wedding", "Baby Shower",
+       "Get Well Soon", "Thank you", "Sympathy", "Congratulations", "Just because"
+   };
+   int num_occasions = 15;
+
+   std::string occasionToneText;
+   std::string relationshipText;
+
+   // List of relationships
+   std::string relationships[] = {
+       "Mom", "Dad"," Brother", "Sister", "Aunt", "Uncle", "Cousin",
+       "Grandma", "Grandpa", "Granddaughter",
+       "Grandson", "Friend", "Peer", "Boss", "Coworker", "Specific Name"
+   };
+   int num_relationships = 16;
+
+   bool validOccasion = false;
+   bool validTone = false;
+   std::string occassionToneText = "";
+
+   while (validOccasion == false) {
+       cout << "Enter the occasion of the greeting card: (Enter '1' for Birthday,'2' for Anniversary...)\n";
+       for (int i = 0; i < num_occasions; i++) {
+           cout << i + 1 << ". " << occasions[i] << endl;
+       }
+       int occasion_choice;
+       cin >> occasion_choice;
+       if (occasion_choice > 0 && occasion_choice <= num_occasions) {
+           validOccasion = true;
+
+           while (validTone == false){
+               cout << "Would you like the card to be humorous or serious? (Enter '1' for humorous or '2' for serious): \n";
+               int tone_choice;
+               cin >> tone_choice;
+               if (tone_choice == 1 || tone_choice == 2) {
+                   validTone = true;
+                   int occasionSelection = occasion_choice - 1;
+                   occasionToneText = occassionToneOutput(occasionSelection, tone_choice);
+               }else{
+                   cout << "Invalid occasion! Please choose humurous (1) or serious (2).\n" << endl;
+               }
+           }
+       }else {
+           cout << "Invalid occasion! Please choose an occasion numbered 1 through 15." << endl;
+       }
+   }
+   bool validRelationship = false;
+
+   std::string personName = "";
+
+   while (validRelationship == false){
+       cout << "Enter the relationship of the greeting card: (Enter '1' for Mom,'2' for Dad...)\n";
+       for (int i = 0; i < num_relationships; i++) {
+           cout << i + 1 << ". " << relationships[i] << endl;
+       }
+       int relationship_choice;
+       cin >> relationship_choice;
+       if (relationship_choice > 0 && relationship_choice < num_relationships){
+           validRelationship = true;
+           personName = relationships[relationship_choice - 1];
+       }else if (relationship_choice == num_relationships){
+           validRelationship = true;
+           cout << "Enter the specific name for the card\n";
+           cin >> personName;
+       }
+       else{
+           cout << "Invalid input! Please choose a relationship from the provided options." << endl;
+       }
+   }
+
+   cout << "Enter the name(s) of the person the card is from.\n";
+   std::string senderName = "";
+   cin >> senderName;
+
+   cout << "Dear " + personName + ",\n";
+   cout << "\n" + occasionToneText + "\n";
+   cout << "From " + senderName + "\n";
+
+
+   return 0;
+}
+
+
+
+
+
+std::string occassionToneOutput (int occasionSelection, int toneNum){
+   std::string occasionToneText;
+   if (toneNum == 1) {
+       if (occasionSelection == 0) {
+           return "Happy birthday to someone who's been around long enough to know how to use a computer but not long enough to understand emojis.\n";
+       } else if (occasionSelection == 1) {
+           occasionToneText = "Another year of marriage and we still haven't killed each other! Congrats!\n";
+       } else if (occasionSelection == 2) {
+           occasionToneText = "Happy Valentine's Day! Remember, if all else fails, there's always chocolate and wine!\n";
+       } else if (occasionSelection == 3) {
+           occasionToneText = "Happy Mother's Day to a mom who's cooler than the other side of the pillow. Keep being awesome!\n";
+       } else if (occasionSelection == 4) {
+           occasionToneText = "Happy Father's Day to a dad who's still cooler than all the other dads, even with his dad jokes!\n";
+       } else if (occasionSelection == 5) {
+           occasionToneText = "Deck the halls with boughs of holly, Fa-la-la-la-la, la-la-la-la! Don we now our ugly sweaters, Fa-la-la-la-la, la-la-la-la! Merry Christmas to you!\n";
+       } else if (occasionSelection == 6) {
+           occasionToneText = "Another year down the drain! Let's make this new one count. Happy New Year!\n";
+       } else if (occasionSelection == 7) {
+           occasionToneText = "You're officially a graduate. Time to adult! Congratulations on graduating and entering the real world.\n";
+       } else if (occasionSelection == 8) {
+           occasionToneText = "Congratulations on getting hitched! Now the real fun begins. Best wishes on your wedding day!\n";
+       } else if (occasionSelection == 9) {
+           occasionToneText = "Diapers, bottles, and endless nights, oh my! Congratulations on your upcoming bundle of joy!\n";
+       } else if (occasionSelection == 10) {
+           occasionToneText = "Take it easy and get well cheesy! Here's to a speedy recovery and lots of ice cream.\n";
+       } else if (occasionSelection == 11) {
+           occasionToneText = "Thanks a million! You're a shining star in my galaxy of awesome people. I owe you one, or maybe two cups of coffee!\n";
+       } else if (occasionSelection == 12) {
+           occasionToneText = "I'm really sorry for your loss. Losing someone we love is like getting a flat tire on a roller coaster - unexpected and incredibly rough. Take all the time you need to process, and I'll be here to help you get back on track.\n";
+       } else if (occasionSelection == 13) {
+           occasionToneText = "Congrats, rockstar! You've officially unlocked the next level of awesomeness. Just remember, with great power comes great responsibility, so be prepared for more demands on your superhero skills!\n";
+       } else if (occasionSelection == 14) {
+           occasionToneText = "Just because...I felt like spreading some smiles your way! Hope this unexpected card makes you chuckle and brightens up your day, just like you brighten up mine!\n";
+       }
+   }
+
+   if (toneNum == 2) {
+       if (occasionSelection == 0) {
+           occasionToneText = "Wishing you a very happy birthday filled with love, laughter, and unforgettable memories!\n";
+       } else if (occasionSelection == 1) {
+           occasionToneText = "Congratulations on another year of love and commitment! May our bond continue to grow stronger with each passing year.\n";
+       } else if (occasionSelection == 2) {
+           occasionToneText = "Wishing you a Valentine's Day filled with love, romance, and all the little things that make your heart skip a beat.\n";
+       } else if (occasionSelection == 3) {
+           occasionToneText = "Happy Mother's Day to the most amazing, loving, and beautiful mom in the world. Thank you for everything you do!\n";
+       } else if (occasionSelection == 4) {
+           occasionToneText = "Wishing a very happy Father's Day to a dad who's always been there for me, no matter what. Thank you for being the best!\n";
+       } else if (occasionSelection == 5) {
+           occasionToneText = "Wishing you a very merry Christmas filled with love, joy, and all the blessings of the season. Merry Christmas!\n";
+       } else if (occasionSelection == 6) {
+           occasionToneText = "Wishing you a happy New Year filled with new beginnings, fresh starts, and all the happiness you can handle. Cheers to the future!\n";
+       } else if (occasionSelection == 7) {
+           occasionToneText = "Congratulations on your graduation! Wishing you all the success, happiness, and adventure that life has to offer. Well done!\n";
+       } else if (occasionSelection == 8) {
+           occasionToneText = "Wishing you a lifetime of love, joy, and happiness on your wedding day and always. Congratulations on your special day!\n";
+       } else if (occasionSelection == 9) {
+           occasionToneText = "Congratulations on your bundle of joy! Wishing you all the love, happiness, and sleepless nights that come with parenthood.\n";
+       } else if (occasionSelection == 10) {
+           occasionToneText = "Wishing you a speedy recovery and good health. Know that you're in my thoughts and prayers during this difficult time.\n";
+       } else if (occasionSelection == 11) {
+           occasionToneText = "From the bottom of my heart, thank you for everything you've done for me. I'm so grateful for your kindness, generosity, and support.\n";
+       } else if (occasionSelection == 12) {
+           occasionToneText = "My deepest condolences on your loss. I'm here for you during this difficult time, and I'm sending you all my love and strength as you navigate through this challenging period.\n";
+       } else if (occasionSelection == 13) {
+           occasionToneText = "Congratulations on your well-deserved success! You've worked hard and earned this moment. Wishing you continued achievements and happiness in all your endeavors.\n";
+       } else if (occasionSelection == 14) {
+           occasionToneText = "Just because...you deserve to know how special you are! Your presence brightens up the world, and I wanted to remind you of your amazingness.\n";
+       }}
+   return occasionToneText;
+}
